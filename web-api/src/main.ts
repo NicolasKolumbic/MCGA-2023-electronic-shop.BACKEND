@@ -13,6 +13,12 @@ async function bootstrap() {
     whitelist: true,
     forbidNonWhitelisted: true
   }))
+
+  app.enableCors({
+    origin: [
+      'http://localhost:3000'
+    ]
+  });
   
   // la web api esta escuchando en el puerto 3000
   // De esta forma, podemos utilizar POSTMAN para enviar peticiones a los diferentes ENDPOINT

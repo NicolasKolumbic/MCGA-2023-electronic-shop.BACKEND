@@ -1,29 +1,18 @@
-import { IsOptional, IsNumber } from 'class-validator';
+import { IsOptional, IsNumber ,IsArray, ValidateNested} from 'class-validator';
+import { SaleDetail } from './update-detail.dto';
+import { Type } from 'class-transformer';
 
 export class UpdateSaleDto  {
     @IsOptional()
     @IsNumber()
     saleId?:Number;
 
-    @IsOptional()
-    @IsNumber()
+    @IsArray()
+    @ValidateNested({ each: true})
+    @Type(() => SaleDetail)
     detail?:SaleDetail[];
 
     @IsOptional()
     @IsNumber()
     total?:Number;
 }
-
-class SaleDetail {
-    @IsNumber()
-    @IsOptional()
-    productId?: number;
-
-    @IsNumber()
-    @IsOptional()
-    quantity?: number;
-
-    @IsNumber()
-    @IsOptional()
-    price?: number;
-  }

@@ -12,7 +12,6 @@ export class SaleService {
   async create(sale: CreateSaleDto){
     const existingSale = await this.saleModel.findOne({ saleId: sale.saleId }).exec();
     if (existingSale) {
-      console.log('sale detail ',sale.detail);
       existingSale.detail = [...existingSale.detail, ...sale.detail];
       existingSale.total += sale.total;
       return await existingSale.save();

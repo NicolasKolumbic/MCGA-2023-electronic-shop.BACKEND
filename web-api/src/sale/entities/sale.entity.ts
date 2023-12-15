@@ -1,5 +1,6 @@
 import { Schema, SchemaFactory, Prop } from "@nestjs/mongoose";
 import mongoose, { Document } from "mongoose";
+import { Detail, SaleDetail } from "./detail.entity";
 
 @Schema()
 export class Sale extends Document{
@@ -11,9 +12,9 @@ export class Sale extends Document{
     saleId:number;
     @Prop({
         required:true,
-        type:mongoose.Types.Array
+        type: [SaleDetail]
     })
-    detail:SaleDetail[];
+    detail:Detail[];
     @Prop({
         required:true,
         isInteger:true
@@ -21,22 +22,4 @@ export class Sale extends Document{
     total:number;
 }
 
-class SaleDetail{
-    @Prop({
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Product",
-        required:true
-    })
-    productId:string;
-    @Prop({
-        required:true,
-        isInteger:true
-    })
-    quantity:number;
-    @Prop({
-        required:true,
-    })
-    price:number;
-}
-
-export const SaleSchema = SchemaFactory.createForClass(Sale)
+export const SaleSchema = SchemaFactory.createForClass(Sale);

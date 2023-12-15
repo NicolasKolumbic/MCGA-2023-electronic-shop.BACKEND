@@ -1,4 +1,6 @@
-import { IsNotEmpty, IsNumber, IsArray, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsArray, ValidateNested } from 'class-validator';
+import { SaleDetail } from './create-detail.dto';
+import { Type } from 'class-transformer';
 
 export class CreateSaleDto {
     @IsNotEmpty()
@@ -6,22 +8,10 @@ export class CreateSaleDto {
     saleId:number;
     @IsNotEmpty()
     @IsArray()
+    @ValidateNested({ each: true})
+    @Type(() => SaleDetail)
     detail:SaleDetail[];
     @IsNotEmpty()
     @IsNumber()
     total:number;
 }
-
-class SaleDetail{
-    @IsString()
-    @IsNotEmpty()
-    productId: string;
-
-    @IsNumber()
-    @IsNotEmpty()
-    quantity: number;
-
-    @IsNumber()
-    @IsNotEmpty()
-    price: number;
-  }

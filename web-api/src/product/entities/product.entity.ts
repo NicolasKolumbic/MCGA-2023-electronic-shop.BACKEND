@@ -1,7 +1,6 @@
 import { Schema, SchemaFactory, Prop } from "@nestjs/mongoose";
-import mongoose, { Document, ObjectId, Types } from "mongoose";
+import mongoose, { Document} from "mongoose";
 import { Category } from "src/category/entities/category.entity";
-import { CreateProductDto } from "../dto/create-product.dto";
 import { ProductDetail } from "src/models/product-detail";
 
 // Entidades relacionadas con la BASE DE DATOS, cada una representa una COLLECION de la Base MongoDB 
@@ -39,6 +38,11 @@ export class Product extends Document {
         type: Object
     })
     features: ProductDetail;
+
+    @Prop({
+        isRequired: true  
+    })
+    image: string
 
 }
 

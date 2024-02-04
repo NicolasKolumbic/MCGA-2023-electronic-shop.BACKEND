@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsString, MinLength, IsDecimal, IsInt, IsMongoId, IsJSON } from "class-validator";
+import { IsString, MinLength, IsInt, IsMongoId, IsJSON, IsNumber, IsBase64 } from "class-validator";
 import { ProductDetail } from "src/models/product-detail";
 
 export class CreateProductDto {
@@ -8,7 +8,9 @@ export class CreateProductDto {
     @MinLength(5)
     readonly description: string;
 
-    @IsDecimal()
+   @IsNumber({
+    maxDecimalPlaces: 2
+   })
     readonly price: number;
 
     @IsInt()
@@ -20,4 +22,7 @@ export class CreateProductDto {
 
     @IsJSON()
     readonly features: ProductDetail;
+
+    @IsBase64()
+    readonly image: any
 }

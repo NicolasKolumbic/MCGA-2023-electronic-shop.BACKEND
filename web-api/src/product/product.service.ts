@@ -27,7 +27,7 @@ export class ProductService {
   }
 
   async findAll() {
-    return await  this.productoModel.find();
+    return await this.productoModel.find();
   }
 
   async findOne(id: string) {
@@ -49,8 +49,8 @@ export class ProductService {
     const productToRemove: Product | NotFoundException = await this.productoModel.findById(id);
 
     try {
-      const removedProduct = await (productToRemove as Product).deleteOne();
-      return removedProduct;
+      await (productToRemove as Product).deleteOne();
+      return await this.productoModel.find();
     } catch (error) {
       throw new NotFoundException(error);
     }

@@ -45,7 +45,7 @@ constructor(
 
     try {
       const removedCategory = await (categoryToRemove as Category).deleteOne();
-      return removedCategory;
+      return this.findAll();
     } catch (error) {
       throw new NotFoundException(error);
     }

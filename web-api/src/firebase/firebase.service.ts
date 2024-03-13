@@ -4,8 +4,6 @@ import { User } from './entities/user.entity';
 import { Model } from 'mongoose';
 import { Request } from "express";
 
-
-
 @Injectable()
 export class FirebaseService {
 

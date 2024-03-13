@@ -1,12 +1,24 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import * as cookieParser from "cookie-parser";
+import * as session from 'express-session';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // configurar un prefijo globalmente para todos los endpoints.
   app.setGlobalPrefix('api/v1');
+
+  app.use(
+    session({
+      secret: 'test-secret',
+      resave: false,
+      saveUninitialized: false,
+    }),
+  );
+
+  app.use(cookieParser());
 
   // prever que la API reciba datos que no se encuentran en los modelos de datos.
   app.useGlobalPipes(new ValidationPipe({
@@ -15,6 +27,7 @@ async function bootstrap() {
   }))
 
   app.enableCors({
+    credentials: true,
     origin: [
       'http://localhost:3000'
     ]

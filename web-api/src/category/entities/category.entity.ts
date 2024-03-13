@@ -2,7 +2,6 @@ import { Schema, SchemaFactory, Prop } from "@nestjs/mongoose";
 import { Document } from "mongoose";
 import { ProductDetail } from "src/models/product-detail";
 
-
 @Schema()
 export class Category extends Document{
 
